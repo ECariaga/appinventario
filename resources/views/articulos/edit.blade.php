@@ -1,4 +1,8 @@
 @extends('articulos.layout')
 @section('content')
 
-<h1>Editar Articulo</h1>
+<form action="{{url('/articulo/'.$articulo->id)}}" method="post" enctype="multipart/form-data">
+@csrf
+{{method_field('PATCH')}}   
+@include('articulos.form')
+</form>
