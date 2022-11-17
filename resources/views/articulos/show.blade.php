@@ -11,6 +11,9 @@
         <p class="card-text">N° Serie : {{ $articulos->NumSerie }}</p>
         <p class="card-text">Estado : {{ $articulos->Estado }}</p>
         <p class="card-text">Ubicación : {{ $articulos->Ubicacion }}</p>
+        <img src="{{asset('storage').'/'.$articulos->Foto }}" width="200" alt=""><br>
+
+        <a href="{{ url('/articulo/') }}" class="btn btn-success btn-sm">Regresar</a>
   </div>
       
     </hr>

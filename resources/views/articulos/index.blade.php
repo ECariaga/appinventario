@@ -1,11 +1,16 @@
 @extends('articulos.layout')
 @section('content')
 
+
     <div class="card">
         <div class="card-header">
             <h2>Lista de Articulos</h2>
         </div>
+        
         <div class="card-body">
+        @if(Session::has('mensaje'))
+          {{Session::get('mensaje')}}
+        @endif
             <a href="{{ url('/articulo/create') }}" class="btn btn-success btn-sm" title="Agregar Nuevo Articulo">
                 <i class="fa fa-plus" aria-hidden="true"></i> Agregar Articulo
             </a>
@@ -37,7 +42,7 @@
                             <td>{{ $articulo->NumSerie }}</td>
                             <td>{{ $articulo->Estado }}</td>
                             <td>{{ $articulo->Ubicacion }}</td>
-                            <td><img src="{{asset('storage').'/'.$articulo->Foto}}" width="200" alt=""></td>
+                            <td><img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$articulo->Foto}}" width="200" alt=""></td>
                             <td>
                                 <a href="{{ url('/articulo/' . $articulo->id) }}" title="Ver detalle"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i>Detalle</button></a>
                                 <a href="{{ url('/articulo/' . $articulo->id . '/edit') }}" title="Editar Articulo"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button></a>
