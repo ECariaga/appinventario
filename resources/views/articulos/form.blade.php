@@ -28,6 +28,9 @@
         <label>Numero de Serie</label></br>
         <input type="text" name="NumSerie" value="{{isset($articulo->NumSerie)?$articulo->NumSerie:old('NumSerie')}}" id="NumSerie" class="form-control"></br>
 
+        <label>Cantidad</label></br>
+        <input type="text" name="Cantidad" value="{{isset($articulo->Cantidad)?$articulo->Cantidad:old('Cantidad')}}" id="Cantidad" class="form-control"></br>
+
         <label>Estado</label></br>
         <input type="text" name="Estado" value="{{isset($articulo->Estado)?$articulo->Estado:old('Estado')}}" id="Estado" class="form-control"></br>
 

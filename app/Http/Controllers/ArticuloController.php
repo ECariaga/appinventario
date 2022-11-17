@@ -28,14 +28,15 @@ class ArticuloController extends Controller
              'Marca'=>'required|string|max:100',
              'Modelo'=>'required|string|max:100',
              'NumSerie'=>'required|string|max:100',
+             'Cantidad'=>'required|int',
              'Estado'=>'required|string|max:100',
              'Ubicacion'=>'required|string|max:100',
-             'Foto'=>'required|max:10000|mimes:jpeg,png,jpg',
         ];
 
         $mensaje=[
             'required'=> 'El :attribute del artículo es obligatorio',
             'Marca.required'=>'La :attribute del artículo es obligatoria',
+            'Cantidad.required'=>'La :attribute que hay del artículo es obligatoria',
             'Ubicacion.required'=>'La :attribute del artículo es obligatoria',
             'Foto.required'=>'La foto es obligatoria',
         ];
@@ -70,6 +71,7 @@ class ArticuloController extends Controller
              'Marca'=>'required|string|max:100',
              'Modelo'=>'required|string|max:100',
              'NumSerie'=>'required|string|max:100',
+             'Cantidad'=>'required|int',
              'Estado'=>'required|string|max:100',
              'Ubicacion'=>'required|string|max:100',
         ];
@@ -77,6 +79,7 @@ class ArticuloController extends Controller
         $mensaje=[
             'required'=> 'El :attribute del artículo es obligatorio',
             'Marca.required'=>'La :attribute del artículo es obligatoria',
+            'Cantidad.required'=>'La :attribute que hay del artículo es obligatoria',
             'Ubicacion.required'=>'La :attribute del artículo es obligatoria',
             'Foto.required'=>'La foto es obligatoria',
         ];
@@ -99,7 +102,8 @@ class ArticuloController extends Controller
         Articulo::where('id', '=', $id)->update($datos);
         $articulo = Articulo::findOrFail($id);
 
-        return view('articulos.edit', compact('articulo'));
+        //return view('articulos.edit', compact('articulo'));
+        return redirect('articulo')->with('mensaje', 'Artículo modificado con éxito');
     }
 
     public function destroy($id)

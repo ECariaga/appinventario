@@ -9,6 +9,7 @@
         <p class="card-text">Marca : {{ $articulos->Marca }}</p>
         <p class="card-text">Modelo : {{ $articulos->Modelo }}</p>
         <p class="card-text">N° Serie : {{ $articulos->NumSerie }}</p>
+        <p class="card-text">Cantidad : {{ $articulos->Cantidad }}</p>
         <p class="card-text">Estado : {{ $articulos->Estado }}</p>
         <p class="card-text">Ubicación : {{ $articulos->Ubicacion }}</p>
         <img src="{{asset('storage').'/'.$articulos->Foto }}" width="200" alt=""><br>

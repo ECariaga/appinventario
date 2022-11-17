@@ -8,9 +8,17 @@
         </div>
         
         <div class="card-body">
-        @if(Session::has('mensaje'))
-          {{Session::get('mensaje')}}
-        @endif
+         
+            @if(Session::has('mensaje'))
+                <!--Si hay algun mensaje este de debe mostrar-->
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{Session::get('mensaje')}}
+                    <!--Para hacer desaparecer el alert-->
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            
             <a href="{{ url('/articulo/create') }}" class="btn btn-success btn-sm" title="Agregar Nuevo Articulo">
                 <i class="fa fa-plus" aria-hidden="true"></i> Agregar Articulo
             </a>
@@ -26,6 +34,7 @@
                             <th>Marca</th>
                             <th>Modelo</th>
                             <th>N° de Serie</th>
+                            <th>Cantidad</th>
                             <th>Estado</th>
                             <th>Ubicación</th>
                             <th>Foto</th>
@@ -40,6 +49,7 @@
                             <td>{{ $articulo->Marca }}</td>
                             <td>{{ $articulo->Modelo }}</td>
                             <td>{{ $articulo->NumSerie }}</td>
+                            <td>{{ $articulo->Cantidad }}</td>
                             <td>{{ $articulo->Estado }}</td>
                             <td>{{ $articulo->Ubicacion }}</td>
                             <td><img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$articulo->Foto}}" width="200" alt=""></td>
