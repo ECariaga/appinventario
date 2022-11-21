@@ -34,7 +34,7 @@ class ArticuloController extends Controller
             'Nombre'=>'required|string|max:100',
              'Marca'=>'required|string|max:100',
              'Modelo'=>'required|string|max:100',
-             'NumSerie'=>'required|string|max:100',
+             'NumSerie'=>'nullable|string|max:100',
              'Cantidad'=>'required|int',
              'Ubicacion'=>'required|string|max:100',
              'Foto'=>'max:10000|mimes:jpg,jpeg,png',
@@ -68,7 +68,7 @@ class ArticuloController extends Controller
         $estados = Estado::all();
         $articulo = Articulo::find($id);
         //return view('articulos.show')->with('articulos', $articulo);
-        return view('articulos.show', compact('estados'));
+        return view('articulos.show', compact('estados'))->with('articulos', $articulo);
     }
 
     public function edit($id)
@@ -83,12 +83,12 @@ class ArticuloController extends Controller
         $estados = Estado::all();
 
         $campos=[
+            'id_estado'=>'required|int|',
             'Nombre'=>'required|string|max:100',
              'Marca'=>'required|string|max:100',
              'Modelo'=>'required|string|max:100',
-             'NumSerie'=>'required|string|max:100',
+             'NumSerie'=>'nullable|string|max:100',
              'Cantidad'=>'required|int',
-             'Estado'=>'required|string|max:100',
              'Ubicacion'=>'required|string|max:100',
         ];
 
@@ -115,7 +115,7 @@ class ArticuloController extends Controller
             $datos['Foto'] = $request->file('Foto')->store('uploads', 'public');
         }
 
-        Articulo::where('id', '=', $id)->update($datosArticulo);
+        Articulo::where('id', '=', $id)->update($datos);
         $articulo = Articulo::findOrFail($id);
 
         //return view('articulos.edit', compact('articulo'));
