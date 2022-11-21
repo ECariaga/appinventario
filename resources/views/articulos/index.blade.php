@@ -6,7 +6,7 @@
 
 @section('content')
 
-
+  <div class="py-3">
     <div class="card">
         <div class="card-header">
             <h2>Lista de Artículos</h2>
@@ -93,6 +93,7 @@
             
         </div>
     </div>
+  </div>  
 
  @section('js')
  

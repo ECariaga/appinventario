@@ -1,5 +1,6 @@
 
 <div class="container">
+    <div class="py-3">
     <div class="card">
     <div class="card-header"><h3>{{$modo}} Articulos</h3></div>
     <div class="card-body">
@@ -17,31 +18,35 @@
                 
             @endif  
             <label>Nombre</label></br>
-            <input type="text" name="Nombre" value="{{isset($articulo->Nombre)?$articulo->Nombre:old('Nombre')}}" id="Nombre" class="form-control"></br>
+            <input type="text" name="Nombre" value="{{isset($articulo->Nombre)?$articulo->Nombre:old('Nombre')}}" id="Nombre" class="form-control" placeholder="Nombre del Artículo"></br>
 
             <label>Marca</label></br>
-            <input type="text" name="Marca" value="{{isset($articulo->Marca)?$articulo->Marca:old('Marca')}}" id="Marca" class="form-control"></br>
+            <input type="text" name="Marca" value="{{isset($articulo->Marca)?$articulo->Marca:old('Marca')}}" id="Marca" class="form-control" placeholder="Marca del Artículo"></br>
 
             <label>Modelo</label></br>
-            <input type="text" name="Modelo" value="{{isset($articulo->Modelo)?$articulo->Modelo:old('Modelo')}}" id="Modelo" class="form-control"></br>
+            <input type="text" name="Modelo" value="{{isset($articulo->Modelo)?$articulo->Modelo:old('Modelo')}}" id="Modelo" class="form-control" placeholder="Modelo del Artículo"></br>
 
-            <label>Numero de Serie</label></br>
-            <input type="text" name="NumSerie" value="{{isset($articulo->NumSerie)?$articulo->NumSerie:old('NumSerie')}}" id="NumSerie" class="form-control"></br>
-
-            <label>Cantidad</label></br>
-            <input type="number" name="Cantidad" value="{{isset($articulo->Cantidad)?$articulo->Cantidad:old('Cantidad')}}" id="Cantidad" class="form-control"></br>
-
-            <label>Estado</label></br>
-            <select class="form-select" name="id_estado" id="id_estado">
-                <option selected disabled value="">--Seleccione el Estado--</option>
-                @foreach($estados as $estado)
-                <option value="{{ $estado->id }}" @if (isset($articulo->id_estado) && $articulo->id_estado == $estado->id) selected @endif>{{$estado->descripcion}}</option>
-                @endforeach
-            </select>
-            </br>
-
+            <label>Número de Serie</label></br>
+            <input type="text" name="NumSerie" value="{{isset($articulo->NumSerie)?$articulo->NumSerie:old('NumSerie')}}" id="NumSerie" class="form-control" placeholder="Número de Serie del Artículo"></br>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Cantidad</label></br>
+                    <input type="number" name="Cantidad" value="{{isset($articulo->Cantidad)?$articulo->Cantidad:old('Cantidad')}}" id="Cantidad" class="form-control" placeholder="Cantidad disponible del Artículo"></br>
+                </div>
+                <div class="col-md-6">
+                    <label>Estado</label></br>
+                    <select class="form-select" name="id_estado" id="id_estado">
+                        <option selected disabled value="">--Seleccione el Estado--</option>
+                        @foreach($estados as $estado)
+                        <option value="{{ $estado->id }}" @if (isset($articulo->id_estado) && $articulo->id_estado == $estado->id) selected @endif>{{$estado->descripcion}}</option>
+                        @endforeach
+                    </select>
+                    </br>
+                </div>
+            </div>
             <label>Ubicación</label></br>
-            <input type="text" name="Ubicacion" value="{{isset($articulo->Ubicacion)?$articulo->Ubicacion:old('Ubicacion')}}" id="Ubicacion" class="form-control"></br>
+            <input type="text" name="Ubicacion" value="{{isset($articulo->Ubicacion)?$articulo->Ubicacion:old('Ubicacion')}}" id="Ubicacion" class="form-control" placeholder="Lugar donde se encuentra el Artículo"></br>
 
             <label>Foto</label></br>
             @if(isset($articulo->Foto))
@@ -56,4 +61,5 @@
 
     </div>
     </div>
+    </div> 
 </div>    
