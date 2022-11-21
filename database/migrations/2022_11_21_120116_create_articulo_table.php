@@ -15,22 +15,22 @@ return new class extends Migration
     {
         Schema::create('articulo', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_estado');
             $table->string('Nombre');
             $table->string('Marca');
             $table->string('Modelo');
             $table->string('NumSerie');
             $table->integer('Cantidad');
-            $table->string('Estado');
             $table->string('Ubicacion');
             $table->string('Foto');
-            
+            $table->foreign('id_estado')->references('id')->on('estado');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
+     * 
      * @return void
      */
     public function down()

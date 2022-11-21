@@ -50,7 +50,12 @@
                             <td>{{ $articulo->Modelo }}</td>
                             <td>{{ $articulo->NumSerie }}</td>
                             <td>{{ $articulo->Cantidad }}</td>
-                            <td>{{ $articulo->Estado }}</td>
+                             @foreach($estados as $estado)
+                                 @if($articulo->id_estado == $estado->id)
+                                    <td>{{ $estado -> descripcion }}</td>
+                                    @break
+                                 @endif
+                             @endforeach
                             <td>{{ $articulo->Ubicacion }}</td>
                             <td><img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$articulo->Foto}}" width="200" alt=""></td>
                             <td>

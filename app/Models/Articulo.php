@@ -11,5 +11,9 @@ class Articulo extends Model
 
     protected $table = 'articulo';
     protected $primaryKey = 'id';
-    protected $fillable = ['Nombre','Marca','Modelo','NumSerie','Cantidad','Estado','Ubicacion','Foto'];
+    protected $fillable = ['id_estado','Nombre','Marca','Modelo','NumSerie','Cantidad','Estado','Ubicacion','Foto'];
+
+    public function estado(){
+        return $this->belongsTo(Estado::class, 'id_estado', 'id');
+    }
 }

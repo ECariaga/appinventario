@@ -32,7 +32,13 @@
         <input type="text" name="Cantidad" value="{{isset($articulo->Cantidad)?$articulo->Cantidad:old('Cantidad')}}" id="Cantidad" class="form-control"></br>
 
         <label>Estado</label></br>
-        <input type="text" name="Estado" value="{{isset($articulo->Estado)?$articulo->Estado:old('Estado')}}" id="Estado" class="form-control"></br>
+        <select class="form-select" name="id_estado" id="id_estado">
+            <option selected disabled value="">--Seleccione el Estado--</option>
+            @foreach($estados as $estado)
+            <option value="{{ $estado->id }}" @if (isset($articulo->id_estado) && $articulo->id_estado == $estado->id) selected @endif>{{$estado->descripcion}}</option>
+            @endforeach
+        </select>
+        </br>
 
         <label>Ubicación</label></br>
         <input type="text" name="Ubicacion" value="{{isset($articulo->Ubicacion)?$articulo->Ubicacion:old('Ubicacion')}}" id="Ubicacion" class="form-control"></br>

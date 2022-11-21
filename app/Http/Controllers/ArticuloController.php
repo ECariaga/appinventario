@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articulo;
+use App\Models\Estado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,25 +13,31 @@ class ArticuloController extends Controller
     public function index()
     {
 
-        $articulos = Articulo::all();
-        return view('articulos.index')->with('articulos', $articulos);
+        //$articulos = Articulo::all();
+        $datosart['articulos'] = Articulo::paginate(100);
+        $estados = Estado::all();
+        //return view('articulos.index')->with('articulos', $articulos);
+        return view('articulos.index', $datosart, compact('estados'));
     }
 
     public function create()
     {
-        return view('articulos.create');
+        $estados = Estado::all();
+        //return view('articulos.create');
+        return view('articulos.create', compact('estados'));
     }
 
     public function store(Request $request)
     {
         $campos=[
+            'id_estado'=>'required|int|',
             'Nombre'=>'required|string|max:100',
              'Marca'=>'required|string|max:100',
              'Modelo'=>'required|string|max:100',
              'NumSerie'=>'required|string|max:100',
              'Cantidad'=>'required|int',
-             'Estado'=>'required|string|max:100',
              'Ubicacion'=>'required|string|max:100',
+             'Foto'=>'max:10000|mimes:jpg,jpeg,png',
         ];
 
         $mensaje=[
@@ -43,9 +50,13 @@ class ArticuloController extends Controller
 
         $this->validate($request, $campos,$mensaje);
 
+        $estados = Estado::all();
         $datos = request()->except(['_token']);
+
         if ($request->hasFile('Foto')) {
             $datos['Foto'] = $request->file('Foto')->store('uploads', 'public');
+        }else {
+            $datos['Foto'] = 'uploads/default_image.png';
         }
 
         Articulo::create($datos);
@@ -54,18 +65,23 @@ class ArticuloController extends Controller
 
     public function show($id)
     {
+        $estados = Estado::all();
         $articulo = Articulo::find($id);
-        return view('articulos.show')->with('articulos', $articulo);
+        //return view('articulos.show')->with('articulos', $articulo);
+        return view('articulos.show', compact('estados'));
     }
 
     public function edit($id)
     {
+        $estados = Estado::all();
         $articulo = Articulo::findOrFail($id);
-        return view('articulos.edit', compact('articulo'));
+        return view('articulos.edit', compact('articulo','estados'));
     }
 
     public function update(Request $request, $id)
     {
+        $estados = Estado::all();
+
         $campos=[
             'Nombre'=>'required|string|max:100',
              'Marca'=>'required|string|max:100',
@@ -81,12 +97,12 @@ class ArticuloController extends Controller
             'Marca.required'=>'La :attribute del artículo es obligatoria',
             'Cantidad.required'=>'La :attribute que hay del artículo es obligatoria',
             'Ubicacion.required'=>'La :attribute del artículo es obligatoria',
-            'Foto.required'=>'La foto es obligatoria',
+            //'Foto.required'=>'La foto es obligatoria',
         ];
 
         if ($request->hasFile('Foto')){
             $campos=['Foto'=>'required|max:10000|mimes:jpeg,png,jpg',];
-            $mensaje=['Foto.required'=>'La foto es obligatoria',];
+           // $mensaje=['Foto.required'=>'La foto es obligatoria',];
         } 
 
         $this->validate($request, $campos,$mensaje);
@@ -99,7 +115,7 @@ class ArticuloController extends Controller
             $datos['Foto'] = $request->file('Foto')->store('uploads', 'public');
         }
 
-        Articulo::where('id', '=', $id)->update($datos);
+        Articulo::where('id', '=', $id)->update($datosArticulo);
         $articulo = Articulo::findOrFail($id);
 
         //return view('articulos.edit', compact('articulo'));
