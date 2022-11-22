@@ -5,4 +5,4 @@
       @csrf
       @include('articulos.form',['modo'=>'Agregar'])
     </form>
-
+@endsection

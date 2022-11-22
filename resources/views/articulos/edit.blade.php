@@ -6,3 +6,4 @@
 {{method_field('PATCH')}}   
 @include('articulos.form',['modo'=>'Editar'])
 </form>
+@endsection
