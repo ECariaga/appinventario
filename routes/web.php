@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::resource("/articulo", ArticuloController::class);
+Route::post('/articulo/{id}', [ArticuloController::class, 'updateCategoria']);

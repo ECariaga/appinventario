@@ -66,16 +66,25 @@ class ArticuloController extends Controller
     public function show($id)
     {
         $estados = Estado::all();
-        $articulo = Articulo::find($id);
+        $articulo = Articulo::findOrFail($id);
         //return view('articulos.show')->with('articulos', $articulo);
-        return view('articulos.show', compact('estados'))->with('articulos', $articulo);
+        return view('articulos.show', compact('articulo','estados'))->with('articulos', $articulo);
     }
 
     public function edit($id)
     {
         $estados = Estado::all();
+        
         $articulo = Articulo::findOrFail($id);
         return view('articulos.edit', compact('articulo','estados'));
+    }
+
+    public function updateCategoria(Request $request, $id)
+    {
+        $detalle = request()->except(['_token', '_method']);
+        Articulo::where('id','=',$id)->update($detalle);
+        $articulo = Articulo::findOrFail($id);
+        return redirect('articulo.show')->with('mensaje', 'Artículo modificado con éxito');
     }
 
     public function update(Request $request, $id)

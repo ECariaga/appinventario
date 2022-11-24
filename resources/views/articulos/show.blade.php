@@ -36,7 +36,7 @@
 
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hola" id="myInput">
-  Launch static backdrop modal
+  Ver historial
 </button>
 
 <!-- Modal -->
@@ -44,16 +44,27 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Historial de Artículo</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        
+      <table id= "tabla_historial" class="table table-striped table table-bordered" style="width:100%">
+      <thead class="table-dark">
+        
+        <tr>
+          <th class="align-middle text-center">Fecha</th>
+          <th class="align-middle text-center">Hora</th>
+          <th class="align-middle text-center">Descripción</th>
+          <th class="align-middle text-center">Cantidad</th>
+        </tr>
+      </thead>  
+      </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -79,11 +90,10 @@
 </div>
 @endsection
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <!--modal -->
-      <script>
-               $("#hola").on('show.bs.modal',function(){
-                $('#myInput').trigger('focus')
-               })
-              </script>
+   <!--modal -->
+  <script>
+    $("#hola").on('show.bs.modal',function(){
+      $('#myInput').trigger('focus')
+    })
+  </script>
 
