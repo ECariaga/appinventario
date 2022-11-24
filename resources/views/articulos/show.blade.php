@@ -36,7 +36,7 @@
 
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hola" id="myInput">
-  Ver historial
+<i class="bi bi-clock"></i> Ver historial
 </button>
 
 <!-- Modal -->
@@ -59,10 +59,21 @@
           <th class="align-middle text-center">Cantidad</th>
         </tr>
       </thead>  
+      <tbody>
+        
+          <tr>
+            <th class="align-middle text-center">{{ $articulo->updated_at->format('d-m-y') }}</th>
+            <th class="align-middle text-center">{{ $articulo->updated_at->format('h:i:s') }}</th>
+            <th class="align-middle text-center">Descripción</th>
+            <th class="align-middle text-center">{{ $articulos->Cantidad }}</th>
+          </tr>
+        
+      </tbody>
       </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-success"><i class="bi bi-plus-square-fill"></i> Agregar Registro</button>
       </div>
       </form>
     </div>
@@ -71,7 +82,7 @@
 
 
 
-
+        <!--
           <button type="button" title="Aumentar cantidad" class="btn btn-primary btn-lg mx-1" onclick="cantidad(this)" value="aumentar">
             <i class="bi bi-plus-square-fill"></i>
           </button>
@@ -82,6 +93,7 @@
           <button type="button" title="Eliminar cantidad" class="btn btn-secondary btn-lg mx-1">
             <i class="bi bi-trash-fill"></i>
           </button>
+        -->
         </div>
     
       </div>
