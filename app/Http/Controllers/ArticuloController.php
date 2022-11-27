@@ -124,8 +124,17 @@ class ArticuloController extends Controller
             $datos['Foto'] = $request->file('Foto')->store('uploads', 'public');
         }
 
-        Articulo::where('id', '=', $id)->update($datos);
         $articulo = Articulo::findOrFail($id);
+        //Articulo::where('id', '=', $id)->update($datos);
+        
+        //Metodo de Update Modificado para Audit
+        $articulo->Nombre=$request->Nombre;
+        $articulo->Marca=$request->Marca;
+        $articulo->Modelo=$request->Modelo;
+        $articulo->NumSerie=$request->NumSerie;
+        $articulo->Cantidad=$request->Cantidad;
+        $articulo->Ubicacion=$request->Ubicacion;
+        $articulo->save();
 
         //return view('articulos.edit', compact('articulo'));
         return redirect('articulo')->with('mensaje', 'Artículo modificado con éxito');
