@@ -10,26 +10,26 @@
                
                 <div class="card-body">
                 
-                    <form class="mt-4" method="POST" action="">
+                    <form class="mt-4" method="post" action="">
                     <h5 class="h3 mb-3 pb-3 fw-normal">Registrarse</h5>
                         @csrf
                         <div class="form-group form-floating mb-3">
-                          <input type="text" class="form-control" name="username" value="" placeholder="Nombre" required="required" autofocus>
+                          <input type="text" class="form-control" name="name" id="name" placeholder="Nombre" required="required" autofocus>
                           <label for="floatingName">Nombre</label>
                        </div>
 
                         <div class="form-group form-floating mb-3">
-                          <input type="email" class="form-control" name="username" value="" placeholder="Correo" required="required" autofocus>
+                          <input type="email" class="form-control" name="email" id="email" placeholder="Correo" required="required" autofocus>
                           <label for="floatingName">Correo</label>
                        </div>
 
                        <div class="form-group form-floating mb-3">
-                          <input type="password" class="form-control" name="username" value="" placeholder="Contraseña" required="required" autofocus>
+                          <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required="required" autofocus>
                           <label for="floatingName">Contraseña</label>
                        </div>
 
                        <div class="form-group form-floating mb-3">
-                          <input type="password" class="form-control" name="username" value="" placeholder="Confirmar_pass" required="required" autofocus>
+                          <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirmar_pass" required="required" autofocus>
                           <label for="floatingName">Confirmar Contraseña</label>
                        </div>
 

@@ -21,7 +21,8 @@ Route::get('/', function () {
 });
 
 Route::resource("/articulo", ArticuloController::class);
-//Route::post('/articulo/{id}', [ArticuloController::class, 'updateCategoria']);
 
 Route::get('/registrarse',[RegisterController::class,'create'])->name('registrarse.index');
+Route::post('/registrarse',[RegisterController::class,'store'])->name('registrarse.store');
+
 Route::get('/login',[SessionsController::class,'create'])->name('login.index');
