@@ -3,13 +3,33 @@
 @section('title','Login')
 @section('content')
 
-<div class="card text-center mx-auto my-5 p-5 border border-gray rounded-lg shadow-lg" style="width: 18rem;">
-  <div class="card-body">
-    <h3 class="text-center fw-bold">Login</h3>
-    <form class="mt-4" method="POST" action="">
-        <input type="email" class="border border-gray form-rounded" placeholder="Ingrese su correo">
-    </form>
-  </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card text-center my-5 p-5 shadow-lg">
+               
+                <div class="card-body">
+                
+                    <form class="mt-4" method="POST" action="">
+                    <h5 class="h3 mb-3 pb-3 fw-normal">Inicio de Sesión</h5>
+                        @csrf
+                        <div class="form-group form-floating mb-3">
+                          <input type="text" class="form-control" name="username" value="" placeholder="Correo" required="required" autofocus>
+                          <label for="floatingName">Correo</label>
+                       </div>
+
+                       <div class="form-group form-floating mb-3">
+                          <input type="password" class="form-control" name="username" value="" placeholder="Contraseña" required="required" autofocus>
+                          <label for="floatingName">Contraseña</label>
+                       </div>
+
+                       <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar Sesión</button>
+                       <p class="mt-5 mb-3 text-muted">&copy; {{date('Y')}}</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection
