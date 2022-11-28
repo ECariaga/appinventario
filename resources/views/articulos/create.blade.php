@@ -1,4 +1,4 @@
-@extends('articulos.layout')
+@extends('layouts.app')
 @section('content')
 
     <form action="{{ url('articulo') }}" method="post" enctype="multipart/form-data">

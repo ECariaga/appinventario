@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +17,11 @@ use App\Http\Controllers\ArticuloController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::resource("/articulo", ArticuloController::class);
 //Route::post('/articulo/{id}', [ArticuloController::class, 'updateCategoria']);
+
+Route::get('/registrarse',[RegisterController::class,'create'])->name('registrarse.index');
+Route::get('/login',[SessionsController::class,'create'])->name('login.index');

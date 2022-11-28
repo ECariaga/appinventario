@@ -1,4 +1,4 @@
-@extends('articulos.layout')
+@extends('layouts.app')
 
 @section('css')
     <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
