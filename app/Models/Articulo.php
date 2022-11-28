@@ -18,6 +18,8 @@ class Articulo extends Model implements Auditable
     protected $primaryKey = 'id';
     protected $fillable = ['id_estado','Nombre','Marca','Modelo','NumSerie','Cantidad','Estado','Ubicacion','Foto'];
 
+    
+
     public function estado(){
         return $this->belongsTo(Estado::class, 'id_estado', 'id');
     }

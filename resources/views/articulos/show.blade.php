@@ -41,7 +41,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="hola" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Historial de Artículo</h1>
@@ -53,27 +53,64 @@
       <thead class="table-dark">
         
         <tr>
-          <th class="align-middle text-center">Fecha</th>
-          <th class="align-middle text-center">Hora</th>
-          <th class="align-middle text-center">Descripción</th>
-          <th class="align-middle text-center">Cantidad</th>
+          <th class="align-middle text-center">Usuario</th>
+          <th class="align-middle text-center">Evento Realizado</th>
+          <th class="align-middle text-center">Valores Nuevos</th>
+          <th class="align-middle text-center">Fecha de Actualización</th>
+          <th class="align-middle text-center">Hora de Actualización</th>
         </tr>
       </thead>  
       <tbody>
-        
+           <!--
           <tr>
             <th class="align-middle text-center">{{ $articulo->updated_at->format('d-m-y') }}</th>
             <th class="align-middle text-center">{{ $articulo->updated_at->format('h:i:s') }}</th>
             <th class="align-middle text-center">Descripción</th>
             <th class="align-middle text-center">{{ $articulos->Cantidad }}</th>
           </tr>
-        
+           -->
+          <ul>
+           
+              @forelse ($audits as $audit)
+              @if($audit->auditable_id == $articulo->id)
+              <tr>
+              @if($audit->user_type == null)
+              <th class="align-middle text-center">Desconocido</th>
+              @else
+              <th class="align-middle text-center">{{$audit->user_type}}</th>
+              @endif
+              
+              @switch($audit->event)
+                @case('created')
+                <th class="align-middle text-center">Creado</th>
+                @break
+                @case('updated')
+                <th class="align-middle text-center">Actualizado</th>
+                @break
+                @case('deleted')
+                <th class="align-middle text-center">Eliminado</th>
+                @break
+                @case('restored')
+                <th class="align-middle text-center">Restaurado</th>
+                @break
+              @endswitch
+            
+              <th class="align-middle text-center">{{substr($audit->new_values, 1,-1)}}</th>
+              <th class="align-middle text-center">{{ $audit->updated_at->format('d-m-y')}}</th>
+              <th class="align-middle text-center">{{ $audit->updated_at->format('h:i:s')}}</th>
+            </tr>
+              @endif
+              @empty
+              <h3>No existe un hitorial del articulo</h3>
+              @endforelse
+             
+            
+        </ul>
       </tbody>
       </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-success"><i class="bi bi-plus-square-fill"></i> Agregar Registro</button>
       </div>
       </form>
     </div>

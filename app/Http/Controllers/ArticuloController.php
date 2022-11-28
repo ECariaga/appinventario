@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Models\Estado;
+use App\Models\Audit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -67,8 +68,9 @@ class ArticuloController extends Controller
     {
         $estados = Estado::all();
         $articulo = Articulo::findOrFail($id);
+        $audits = Audit::all(); //para mostrar los audits
         //return view('articulos.show')->with('articulos', $articulo);
-        return view('articulos.show', compact('articulo','estados'))->with('articulos', $articulo);
+        return view('articulos.show', compact('articulo','estados','audits'))->with('articulos', $articulo);
     }
 
     public function edit($id)
