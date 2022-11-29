@@ -20,9 +20,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::resource("/articulo", ArticuloController::class);
+Route::resource("/articulo", ArticuloController::class)->middleware('auth');
 
 Route::get('/registrarse',[RegisterController::class,'create'])->name('registrarse.index');
 Route::post('/registrarse',[RegisterController::class,'store'])->name('registrarse.store');
 
 Route::get('/login',[SessionsController::class,'create'])->name('login.index');
+Route::post('/login',[SessionsController::class,'store'])->name('login.store');
+Route::get('/logout',[SessionsController::class,'destroy'])->name('login.destroy');

@@ -6,6 +6,7 @@
      <!-- Scripts -->
      <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
      <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
      <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
@@ -40,6 +41,31 @@
               <a class="nav-link" href="#">Usuarios</a>
             </li>
           </ul>
+
+           <!--Lado derecho del Navbar -->
+          <div class="mx-5 px-3">
+              @if(auth()->check())
+
+              <div class="dropdown-center dropdown">
+                <button class="btn btn-primary dropdown-toggle"type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle mx-2" style="font-size: 1.5rem;"></i> {{ auth()->user()->name }}
+                </button>
+               <ul class="dropdown-menu">
+                 <li><a class="dropdown-item" href="{{ route('login.destroy')}}">Cerrar Sesión</a></li>
+               </ul>
+              </div>  
+              @else
+                <a href="{{route('login.index')}}">
+                 <button type="button" class="btn btn-outline-light me-2">Iniciar Sesión</button>
+                </a>
+              
+                <a href="{{route('registrarse.index')}}">
+                 <button type="button" class="btn btn-primary active">Registrarse</button>
+                </a>
+              @endif
+
+          </div>          
+          
         </div>
       </div>
   </nav>
@@ -69,3 +95,4 @@
 @yield('js')
 </body>
 </html>
+

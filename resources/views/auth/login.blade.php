@@ -22,7 +22,11 @@
                           <input type="password" class="form-control" name="username" value="" placeholder="Contraseña" required="required" autofocus>
                           <label for="floatingName">Contraseña</label>
                        </div>
-
+                        @error('message')
+                        <div class="alert alert-danger" role="alert">
+                         * {{$message}}
+                        </div>
+                        @enderror
                        <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar Sesión</button>
                        <p class="mt-5 mb-3 text-muted">&copy; {{date('Y')}}</p>
                     </form>
