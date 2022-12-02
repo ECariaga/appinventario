@@ -57,7 +57,7 @@ class ArticuloController extends Controller
         if ($request->hasFile('Foto')) {
             $datos['Foto'] = $request->file('Foto')->store('uploads', 'public');
         }else {
-            $datos['Foto'] = 'uploads/default_image.png';
+            $datos['Foto'] = 'default/default_image.png';
         }
 
         Articulo::create($datos);
