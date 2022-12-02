@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Models\Estado;
+use App\Models\User;
 use App\Models\Audit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -43,6 +44,7 @@ class ArticuloController extends Controller
 
         $mensaje=[
             'required'=> 'El :attribute del artículo es obligatorio',
+            'id_estado.required'=> 'El estado del artículo es obligatorio',
             'Marca.required'=>'La :attribute del artículo es obligatoria',
             'Cantidad.required'=>'La :attribute que hay del artículo es obligatoria',
             'Ubicacion.required'=>'La :attribute del artículo es obligatoria',
@@ -66,11 +68,12 @@ class ArticuloController extends Controller
 
     public function show($id)
     {
+        $users = User::all();
         $estados = Estado::all();
         $articulo = Articulo::findOrFail($id);
         $audits = Audit::all(); //para mostrar los audits
         //return view('articulos.show')->with('articulos', $articulo);
-        return view('articulos.show', compact('articulo','estados','audits'))->with('articulos', $articulo);
+        return view('articulos.show', compact('articulo','estados','users','audits'))->with('articulos', $articulo);
     }
 
     public function edit($id)
@@ -105,6 +108,7 @@ class ArticuloController extends Controller
 
         $mensaje=[
             'required'=> 'El :attribute del artículo es obligatorio',
+            'id_estado.required'=> 'El estado del artículo es obligatorio',
             'Marca.required'=>'La :attribute del artículo es obligatoria',
             'Cantidad.required'=>'La :attribute que hay del artículo es obligatoria',
             'Ubicacion.required'=>'La :attribute del artículo es obligatoria',

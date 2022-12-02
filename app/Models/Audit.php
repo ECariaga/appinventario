@@ -13,6 +13,6 @@ class Audit extends Model
 
     protected $table = 'audits';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_type','event','auditable_type','auditable_id','new_values','url','updated_at'];
+    protected $fillable = ['user_id','event','auditable_type','auditable_id','new_values','url','updated_at'];
 
 }
