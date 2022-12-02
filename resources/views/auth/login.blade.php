@@ -14,15 +14,19 @@
                     <h5 class="h3 mb-3 pb-3 fw-normal">Inicio de Sesión</h5>
                         @csrf
                         <div class="form-group form-floating mb-3">
-                          <input type="text" class="form-control" name="username" value="" placeholder="Correo" required="required" autofocus>
+                          <input type="text" class="form-control" name="email" value="" placeholder="Correo" required="required" autofocus>
                           <label for="floatingName">Correo</label>
                        </div>
-
+                       @error('email')
+                        <div class="alert alert-danger" role="alert">
+                         * {{$message}}
+                        </div>
+                        @enderror
                        <div class="form-group form-floating mb-3">
-                          <input type="password" class="form-control" name="username" value="" placeholder="Contraseña" required="required" autofocus>
+                          <input type="password" class="form-control" name="password" value="" placeholder="Contraseña" required="required" autofocus>
                           <label for="floatingName">Contraseña</label>
                        </div>
-                        @error('message')
+                        @error('password')
                         <div class="alert alert-danger" role="alert">
                          * {{$message}}
                         </div>

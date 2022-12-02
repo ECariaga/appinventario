@@ -23,8 +23,8 @@ Route::get('/', function () {
 Route::resource("/articulo", ArticuloController::class)->middleware('auth');
 
 Route::get('/registrarse',[RegisterController::class,'create'])->name('registrarse.index');
-Route::post('/registrarse',[RegisterController::class,'store'])->name('registrarse.store');
+Route::post('/registrarse',[RegisterController::class,'register'])->name('registrarse.register');
 
 Route::get('/login',[SessionsController::class,'create'])->name('login.index');
-Route::post('/login',[SessionsController::class,'store'])->name('login.store');
+Route::post('/login',[SessionsController::class,'login'])->name('login.login');
 Route::get('/logout',[SessionsController::class,'destroy'])->name('login.destroy');

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
 </head>
 
-<body style="background-color: #F4F6F9">
+<body class="d-flex flex-column min-vh-100" style="background-color: #F4F6F9">
 
 <header>
 
