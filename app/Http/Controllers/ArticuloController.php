@@ -131,7 +131,7 @@ class ArticuloController extends Controller
         }
 
         $articulo = Articulo::findOrFail($id);
-        //Articulo::where('id', '=', $id)->update($datos);
+        Articulo::where('id', '=', $id)->update($datos);
         
         //Metodo de Update Modificado para Audit
         $articulo->Nombre=$request->Nombre;
@@ -140,6 +140,7 @@ class ArticuloController extends Controller
         $articulo->NumSerie=$request->NumSerie;
         $articulo->Cantidad=$request->Cantidad;
         $articulo->Ubicacion=$request->Ubicacion;
+        //$articulo->Foto=$request->Foto;
         $articulo->save();
 
         //return view('articulos.edit', compact('articulo'));
