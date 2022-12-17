@@ -35,7 +35,7 @@
               <a class="nav-link active" aria-current="page" href="#">Inventario</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Reportes</a>
+              <a class="nav-link" href="{{ url('/reportes') }}">Reportes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Usuarios</a>
