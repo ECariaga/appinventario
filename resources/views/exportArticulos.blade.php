@@ -18,7 +18,12 @@
             <td>{{ $art->Modelo }}</td>
             <td>{{ $art->NumSerie }}</td>
             <td>{{ $art->Cantidad }}</td>
-            <td>{{ $art->id_estado }}</td>
+            @foreach($estados as $estado)
+            @if($art->id_estado == $estado->id)
+            <td>{{ $estado -> descripcion }}</td>
+            @break
+            @endif
+            @endforeach
             <td>{{ $art->Ubicacion }}</td>
         </tr>
 
