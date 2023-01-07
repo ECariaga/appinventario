@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::post('/registrarse',[RegisterController::class,'register'])->name('regist
 Route::get('/login',[SessionsController::class,'create'])->name('login.index');
 Route::post('/login',[SessionsController::class,'login'])->name('login.login');
 Route::get('/logout',[SessionsController::class,'destroy'])->name('login.destroy');
+
+
+Route::resource('/lista-usuarios',UsuarioController::class);
 
 //Rutas Excel
 Route::get('/reportes',[ExportController::class,'index'])->name('reporte');
