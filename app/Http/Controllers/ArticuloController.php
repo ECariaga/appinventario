@@ -126,45 +126,55 @@ class ArticuloController extends Controller
             //'Foto.required'=>'La foto es obligatoria',
         ];
 
-        if ($request->hasFile('Foto')){
-            $campos=['Foto'=>'required|max:10000|mimes:jpeg,png,jpg',];
-           // $mensaje=['Foto.required'=>'La foto es obligatoria',];
-        } 
-
-        $this->validate($request, $campos,$mensaje);
-
-        $datos = request()->except(['_token', '_method']);
-        
         if ($request->hasFile('Foto')) {
-            $articulo = Articulo::findOrFail($id);
-            Storage::delete('public/'.$articulo->Foto);
-            $datos['Foto'] = $request->file('Foto')->store('uploads', 'public');
+            $campos['Foto'] = 'max:10000|mimes:jpg,jpeg,png';
         }
-
+    
+        $this->validate($request, $campos, $mensaje);
+    
         $articulo = Articulo::findOrFail($id);
-        Articulo::where('id', '=', $id)->update($datos);
-        
-        //Metodo de Update Modificado para Audit
-        $articulo->Nombre=$request->Nombre;
-        $articulo->Marca=$request->Marca;
-        $articulo->Modelo=$request->Modelo;
-        $articulo->NumSerie=$request->NumSerie;
-        $articulo->Cantidad=$request->Cantidad;
-        $articulo->Ubicacion=$request->Ubicacion;
-        //$articulo->Foto=$request->Foto;
-        $articulo->save();
-
-        //return view('articulos.edit', compact('articulo'));
-        return redirect('articulo')->with('mensaje', 'Artículo modificado con éxito');
+    
+        // Guardamos datos actuales para comparar luego
+        $original = $articulo->getOriginal();
+    
+        // Solo actualizamos si algo cambió
+        $datos = $request->only([
+            'id_estado', 'Nombre', 'Marca', 'Modelo', 'NumSerie', 'Cantidad', 'Ubicacion'
+        ]);
+    
+        foreach ($datos as $key => $value) {
+            if ($articulo->$key != $value) {
+                $articulo->$key = $value;
+            }
+        }
+    
+        // Si se cargó nueva foto, actualizamos
+        if ($request->hasFile('Foto')) {
+            if ($articulo->Foto && $articulo->Foto != 'default/default_image.png') {
+                Storage::delete('public/' . $articulo->Foto);
+            }
+            $articulo->Foto = $request->file('Foto')->store('uploads', 'public');
+        }
+    
+        // Solo guardamos si hay cambios
+        if ($articulo->isDirty()) {
+            $articulo->save();
+            return redirect('articulo')->with('mensaje', 'Artículo actualizado con cambios');
+        }
+    
+        return redirect('articulo')->with('mensaje', 'No hubo cambios en el artículo');
     }
 
     public function destroy($id)
     {
         $articulo = Articulo::findOrFail($id);
 
-        if(Storage::delete('public/'.$articulo->Foto)){
-            Articulo::destroy($id);
+        // Verifica si la foto no es la por defecto antes de eliminarla
+        if ($articulo->Foto && $articulo->Foto != 'default/default_image.png') {
+            Storage::delete('public/' . $articulo->Foto);
         }
+        
+        Articulo::destroy($id);
         
         return redirect('articulo')->with('mensaje', 'Artículo eliminado con éxito');
     }

@@ -102,7 +102,28 @@
                           @break
                           @endswitch
 
-                          <td class="align-middle text-center">{{substr($audit->new_values, 1,-1)}}</td>
+                          <td class="align-middle">
+                            <ul class="list-unstyled text-start m-0">
+                              @foreach(json_decode($audit->new_values, true) as $key => $value)
+                                @if($key !== 'id')
+                                  @if($key === 'Foto')
+                                  <li><strong>Imagen:</strong><br>
+                                    <img src="{{ asset('storage/' . $value) }}" alt="Imagen" width="80">
+                                  </li> 
+                                  @elseif($key === 'id_estado')
+                                    @php
+                                        $estadoNombre = $estados->firstWhere('id', $value)->descripcion ?? 'Desconocido';
+                                    @endphp
+                                    <li><strong>Estado:</strong> {{ $estadoNombre }}</li>
+                                    
+                                  @else
+                                  <li><strong>{{ ucfirst($key) }}:</strong> {{ $value }}</li>
+                                  @endif
+                                @endif
+                                
+                              @endforeach
+                            </ul>
+                          </td>
                           <td class="align-middle text-center">{{ $audit->updated_at->format('d-m-y')}}</td>
                           <td class="align-middle text-center">{{ $audit->updated_at->format('h:i:s')}}</td>
                         </tr>

@@ -54,7 +54,7 @@
                             <td class="align-middle text-center">{{ $articulo->Nombre }}</td>
                             <td class="align-middle text-center">{{ $articulo->Marca }}</td>
                             <td class="align-middle text-center">{{ $articulo->Modelo }}</td>
-                            <td>
+                            <td class="align-middle text-center">
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                     {!! DNS1D::getBarcodeHTML("$articulo->NumSerie",'PHARMA') !!}
                                     <span>p - {{ $articulo->NumSerie }}</span>
@@ -69,11 +69,10 @@
                             @endforeach
                             <td class="align-middle text-center">{{ $articulo->Ubicacion }}</td>
                             <td class="align-middle">
-                                <div class="row w-100 align-items-center">
+                                <div class="d-flex justify-content-center align-items-center">
 
-                                    <div class="col text-center">
-                                        <img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$articulo->Foto}}" width="200" alt="">
-                                    </div>
+                                <img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$articulo->Foto}}" width="100" alt="">
+                                    
                                 </div>
                             </td>
                             <td class="align-middle">
@@ -87,7 +86,7 @@
 
                                             <!-- Boton que despliega el Modal -->
 
-                                            <button type="button" class="btn btn-danger btn-lg mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" title="Eliminar Usuario"><i class="bi bi-trash-fill"></i></button>
+                                            <button type="button" class="btn btn-danger btn-lg mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" title="Eliminar Articulo"><i class="bi bi-trash-fill"></i></button>
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
