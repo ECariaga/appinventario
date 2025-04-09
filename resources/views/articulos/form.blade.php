@@ -31,9 +31,6 @@
                     <input type="text" name="Modelo" value="{{isset($articulo->Modelo)?$articulo->Modelo:old('Modelo')}}" id="Modelo" class="form-control" placeholder="Modelo del Artículo"></br>
                 </div>
             </div>
-
-            <label>Número de Serie</label></br>
-            <input type="text" name="NumSerie" value="{{isset($articulo->NumSerie)?$articulo->NumSerie:old('NumSerie')}}" id="NumSerie" class="form-control" placeholder="Número de Serie del Artículo"></br>
             
             <div class="row">
                 <div class="col-md-4">

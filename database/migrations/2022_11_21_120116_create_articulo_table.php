@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('Nombre');
             $table->string('Marca');
             $table->string('Modelo');
-            $table->string('NumSerie')->nullable();
+            $table->string('NumSerie');
             $table->integer('Cantidad');
             $table->string('Ubicacion');
             $table->string('Foto');

@@ -54,7 +54,12 @@
                             <td class="align-middle text-center">{{ $articulo->Nombre }}</td>
                             <td class="align-middle text-center">{{ $articulo->Marca }}</td>
                             <td class="align-middle text-center">{{ $articulo->Modelo }}</td>
-                            <td class="align-middle text-center">{{ $articulo->NumSerie }}</td>
+                            <td>
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                    {!! DNS1D::getBarcodeHTML("$articulo->NumSerie",'PHARMA') !!}
+                                    <span>p - {{ $articulo->NumSerie }}</span>
+                                </div>
+                            </td>
                             <td class="align-middle text-center">{{ $articulo->Cantidad }}</td>
                             @foreach($estados as $estado)
                             @if($articulo->id_estado == $estado->id)

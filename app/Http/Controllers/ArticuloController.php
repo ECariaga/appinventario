@@ -62,8 +62,19 @@ class ArticuloController extends Controller
             $datos['Foto'] = 'default/default_image.png';
         }
 
+        $number = mt_rand(1000000000,9999999999);
+        //Verifica si el número de serie ya existe, si existe genera otro número
+        if($this->numArticulo($number)){
+            $number = mt_rand(1000000000,9999999999);
+        }
+        $datos['NumSerie'] = $number;
+
         Articulo::create($datos);
         return redirect('articulo')->with('mensaje', 'Artículo agregado con éxito');
+    }
+
+    public function numArticulo($number){
+        return Articulo::where('NumSerie', $number)->exists();
     }
 
     public function show($id)

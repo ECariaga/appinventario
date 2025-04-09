@@ -19,7 +19,13 @@
             @if($articulos->NumSerie == null)
             <p class="card-text">N° Serie : Desconocido</p>
             @else
-            <p class="card-text">N° Serie : {{ $articulos->NumSerie }}</p>
+            <div class="card-text">
+              <p>N° Serie :</p>
+              <div class="d-flex flex-column justify-content-center align-items-center">
+                 {!! DNS1D::getBarcodeHTML("$articulo->NumSerie",'PHARMA') !!}
+                  <span>p - {{ $articulo->NumSerie }}</span>
+              </div>
+            </div>
             @endif
             <p class="card-text" id='contador'>Cantidad : {{ $articulos->Cantidad }}</p>
             @foreach($estados as $estado)
