@@ -60,7 +60,7 @@
 
             <input type="submit" value="{{$modo}} Articulo" class="btn btn-success">
 
-            <a href="{{ url('/articulo/') }}" class="btn btn-success">Regresar</a>
+            <a href="{{ secure_url('/articulo/') }}" class="btn btn-success">Regresar</a>
 
     </div>
     </div>

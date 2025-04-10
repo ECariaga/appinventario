@@ -24,7 +24,7 @@
             @endif
 
 
-            <a href="{{ url('/articulo/create') }}" class="btn btn-success btn-sm" title="Agregar Nuevo Articulo">
+            <a href="{{ secure_url('/articulo/create') }}" class="btn btn-success btn-sm" title="Agregar Nuevo Articulo">
                 <i class="fa fa-plus" aria-hidden="true"></i> Agregar Articulo
             </a>
             <br />
@@ -81,8 +81,8 @@
 
                                         <div class="col text-center">
 
-                                            <a href="{{ url('/articulo/' . $articulo->id) }}" title="Ver detalle"><button class="btn btn-secondary btn-lg mx-1"><i class="bi bi-eye-fill"></i></button></a>
-                                            <a href="{{ url('/articulo/' . $articulo->id . '/edit') }}" title="Editar Articulo"><button class="btn btn-primary btn-lg mx-1"><i class="bi bi-pencil-square"></i></button></a>
+                                            <a href="{{ secure_url('/articulo/' . $articulo->id) }}" title="Ver detalle"><button class="btn btn-secondary btn-lg mx-1"><i class="bi bi-eye-fill"></i></button></a>
+                                            <a href="{{ secure_url('/articulo/' . $articulo->id . '/edit') }}" title="Editar Articulo"><button class="btn btn-primary btn-lg mx-1"><i class="bi bi-pencil-square"></i></button></a>
 
                                             <!-- Boton que despliega el Modal -->
 
@@ -101,7 +101,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                            <form method="POST" action="{{ url('/articulo' . '/' . $articulo->id) }}" accept-charset="UTF-8" style="display:inline">
+                                                            <form method="POST" action="{{ secure_url('/articulo' . '/' . $articulo->id) }}" accept-charset="UTF-8" style="display:inline">
                                                                 {{ method_field('DELETE') }}
                                                                 {{ csrf_field() }}
 

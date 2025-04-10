@@ -55,7 +55,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                                <form method="POST" action="{{ url('/lista-usuarios' . '/' . $usuario->id) }}" accept-charset="UTF-8" style="display:inline">
+                                                                <form method="POST" action="{{ secure_url('/lista-usuarios' . '/' . $usuario->id) }}" accept-charset="UTF-8" style="display:inline">
                                                                     {{ method_field('DELETE') }}
                                                                     {{ csrf_field() }}
 

@@ -36,7 +36,7 @@
             @endforeach
             <p class="card-text">Ubicación : {{ $articulos->Ubicacion }}</p>
             <div class="py-3">
-              <a href="{{ url('/articulo/') }}" class="btn btn-success btn-sm">Regresar</a>
+              <a href="{{ secure_url('/articulo/') }}" class="btn btn-success btn-sm">Regresar</a>
             </div>
           </div>
         </div>

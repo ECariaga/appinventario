@@ -4,7 +4,7 @@
     <title>App Inventario CACHS</title>
 
      <!-- Scripts -->
-     <script src="{{ asset('js/app.js') }}" defer></script>
+     <script src="{{ secure_asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
