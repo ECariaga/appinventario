@@ -4,12 +4,12 @@
     <title>App Inventario CACHS</title>
 
      <!-- Scripts -->
-     <script src="{{ secure_asset('js/app.js') }}" defer></script>
+    <script src="{{ secure_asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
-     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 
      <!-- Styles -->
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
@@ -25,20 +25,20 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url('/articulo') }}">Sistema de Inventario</a>
+        <a class="navbar-brand" href="{{ secure_url('/articulo') }}">Sistema de Inventario</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ url('/articulo') }}">Inventario</a>
+              <a class="nav-link active" aria-current="page" href="{{ secure_url('/articulo') }}">Inventario</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/reportes') }}">Reportes</a>
+              <a class="nav-link" href="{{ secure_url('/reportes') }}">Reportes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/lista-usuarios') }}">Usuarios</a>
+              <a class="nav-link" href="{{ secure_url('/lista-usuarios') }}">Usuarios</a>
             </li>
           </ul>
 
