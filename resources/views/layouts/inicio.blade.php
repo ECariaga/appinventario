@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
+    <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/png" sizes="16x16">
 </head>
 
 <body style="background-color: #F4F6F9">
     <header>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b3864; height: 80px;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Sistema de Inventario</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,10 +24,10 @@
                 </button>
 
                 <!--Lado derecho del Navbar -->
-                <div class="mx-5 px-3">
+                <div class="d-flex flex-row mx-3 gap-4">
 
                     <a href="{{route('login.index')}}">
-                        <button type="button" class="btn btn-outline-light me-2">Iniciar Sesión</button>
+                        <button type="button" class="btn btn-outline-light">Iniciar Sesión</button>
                     </a>
 
                     <a href="{{route('registrarse.index')}}">
