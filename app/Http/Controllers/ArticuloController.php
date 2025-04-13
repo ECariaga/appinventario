@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Models\Estado;
+use App\Models\Ubicacion;
 use App\Models\User;
 use App\Models\Audit;
 use Illuminate\Http\Request;
@@ -18,42 +19,45 @@ class ArticuloController extends Controller
         //$articulos = Articulo::all();
         $datosart['articulos'] = Articulo::paginate(100);
         $estados = Estado::all();
+        $ubicaciones = Ubicacion::all();
         //return view('articulos.index')->with('articulos', $articulos);
-        return view('articulos.index', $datosart, compact('estados'));
+        return view('articulos.index', $datosart, compact('estados','ubicaciones'));
     }
 
     public function create()
     {
         $estados = Estado::all();
+        $ubicaciones = Ubicacion::all();
         //return view('articulos.create');
-        return view('articulos.create', compact('estados'));
+        return view('articulos.create', compact('estados','ubicaciones'));
     }
 
     public function store(Request $request)
     {
         $campos=[
-            'id_estado'=>'required|int|',
-            'Nombre'=>'required|string|max:100',
+             'id_estado'=>'required|int|',
+             'id_ubicacion'=>'required|int|',
+             'Nombre'=>'required|string|max:100',
              'Marca'=>'required|string|max:100',
              'Modelo'=>'required|string|max:100',
              'NumSerie'=>'nullable|string|max:100',
              'Cantidad'=>'required|int',
-             'Ubicacion'=>'required|string|max:100',
              'Foto'=>'max:10000|mimes:jpg,jpeg,png',
-        ];
+           ];
 
         $mensaje=[
             'required'=> 'El :attribute del artículo es obligatorio',
             'id_estado.required'=> 'El estado del artículo es obligatorio',
+            'id_ubicacion.required'=> 'La ubicación del artículo es obligatoria',
             'Marca.required'=>'La :attribute del artículo es obligatoria',
             'Cantidad.required'=>'La :attribute que hay del artículo es obligatoria',
-            'Ubicacion.required'=>'La :attribute del artículo es obligatoria',
             'Foto.required'=>'La foto es obligatoria',
         ];
 
         $this->validate($request, $campos,$mensaje);
 
         $estados = Estado::all();
+        $ubicaciones = Ubicacion::all();
         $datos = request()->except(['_token']);
 
         if ($request->hasFile('Foto')) {
@@ -81,18 +85,20 @@ class ArticuloController extends Controller
     {
         $users = User::all();
         $estados = Estado::all();
+        $ubicaciones = Ubicacion::all();
         $articulo = Articulo::findOrFail($id);
         $audits = Audit::all(); //para mostrar los audits
         //return view('articulos.show')->with('articulos', $articulo);
-        return view('articulos.show', compact('articulo','estados','users','audits'))->with('articulos', $articulo);
+        return view('articulos.show', compact('articulo','estados','ubicaciones','users','audits'))->with('articulos', $articulo);
     }
 
     public function edit($id)
     {
         $estados = Estado::all();
+        $ubicaciones = Ubicacion::all();
         
         $articulo = Articulo::findOrFail($id);
-        return view('articulos.edit', compact('articulo','estados'));
+        return view('articulos.edit', compact('articulo','estados','ubicaciones'));
     }
 
     public function updateCategoria(Request $request, $id)
@@ -106,24 +112,24 @@ class ArticuloController extends Controller
     public function update(Request $request, $id)
     {
         $estados = Estado::all();
+        $ubicaciones = Ubicacion::all();
 
         $campos=[
-            'id_estado'=>'required|int|',
-            'Nombre'=>'required|string|max:100',
+             'id_estado'=>'required|int|',
+             'id_ubicacion'=>'required|int|',
+             'Nombre'=>'required|string|max:100',
              'Marca'=>'required|string|max:100',
              'Modelo'=>'required|string|max:100',
              'NumSerie'=>'nullable|string|max:100',
              'Cantidad'=>'required|int',
-             'Ubicacion'=>'required|string|max:100',
         ];
 
         $mensaje=[
             'required'=> 'El :attribute del artículo es obligatorio',
             'id_estado.required'=> 'El estado del artículo es obligatorio',
+            'id_ubicacion.required'=> 'La ubicación del artículo es obligatorio',
             'Marca.required'=>'La :attribute del artículo es obligatoria',
             'Cantidad.required'=>'La :attribute que hay del artículo es obligatoria',
-            'Ubicacion.required'=>'La :attribute del artículo es obligatoria',
-            //'Foto.required'=>'La foto es obligatoria',
         ];
 
         if ($request->hasFile('Foto')) {
@@ -139,7 +145,7 @@ class ArticuloController extends Controller
     
         // Solo actualizamos si algo cambió
         $datos = $request->only([
-            'id_estado', 'Nombre', 'Marca', 'Modelo', 'NumSerie', 'Cantidad', 'Ubicacion'
+            'id_estado', 'id_ubicacion','Nombre', 'Marca', 'Modelo', 'NumSerie', 'Cantidad', 'Ubicacion'
         ]);
     
         foreach ($datos as $key => $value) {

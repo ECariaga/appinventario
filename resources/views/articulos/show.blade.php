@@ -34,7 +34,14 @@
             @break
             @endif
             @endforeach
-            <p class="card-text">Ubicación : {{ $articulos->Ubicacion }}</p>
+
+            @foreach($ubicaciones as $ubicacion)
+            @if($articulos->id_ubicacion == $ubicacion->id)
+            <p class="card-text">Ubicación : {{ $ubicacion -> lugar }}</p>
+            @break
+            @endif
+            @endforeach
+
             <div class="py-3">
               <a href="{{ url('/articulo/') }}" class="btn btn-success btn-sm">Regresar</a>
             </div>
@@ -107,17 +114,22 @@
                               @foreach(json_decode($audit->new_values, true) as $key => $value)
                                 @if($key !== 'id')
                                   @if($key === 'Foto')
-                                  <li><strong>Imagen:</strong><br>
-                                    <img src="{{ asset('storage/' . $value) }}" alt="Imagen" width="80">
-                                  </li> 
-                                  @elseif($key === 'id_estado')
-                                    @php
-                                        $estadoNombre = $estados->firstWhere('id', $value)->descripcion ?? 'Desconocido';
-                                    @endphp
-                                    <li><strong>Estado:</strong> {{ $estadoNombre }}</li>
-                                    
-                                  @else
-                                  <li><strong>{{ ucfirst($key) }}:</strong> {{ $value }}</li>
+                                    <li><strong>Imagen:</strong><br>
+                                      <img src="{{ asset('storage/' . $value) }}" alt="Imagen" width="80">
+                                    </li> 
+                                    @elseif($key === 'id_estado')
+                                      @php
+                                          $estadoNombre = $estados->firstWhere('id', $value)->descripcion ?? 'Desconocido';
+                                      @endphp
+                                      <li><strong>Estado:</strong> {{ $estadoNombre }}</li>
+                                    @elseif($key === 'id_ubicacion')
+                                      @php
+                                          $ubicacionNombre = $ubicaciones->firstWhere('id', $value)->lugar ?? 'Desconocido';
+                                      @endphp
+                                      <li><strong>Ubicación:</strong> {{ $ubicacionNombre }}</li>
+                                      
+                                    @else
+                                    <li><strong>{{ ucfirst($key) }}:</strong> {{ $value }}</li>
                                   @endif
                                 @endif
                                 

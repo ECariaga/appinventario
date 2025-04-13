@@ -41,6 +41,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/lista-usuarios') }}">Usuarios</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/configuracion') }}">Configuración</a>
+            </li>
           </ul>
 
            <!--Lado derecho del Navbar -->
