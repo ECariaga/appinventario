@@ -26,7 +26,9 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b3864; height: 80px;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url('/articulo') }}">Sistema de Inventario</a>
+        <a class="navbar-brand" href="{{ url('/articulo') }}">
+          <img src="{{ asset('img/logo-cachs.png') }}" alt="Logo Colegio" style="max-width: 50px;" class="me-2">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
