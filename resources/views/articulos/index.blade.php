@@ -81,7 +81,7 @@
                                             <div class="modal-content rounded-4">
                                                 <div class="modal-header bg-danger text-white">
                                                     <h5 class="modal-title" id="modalLabel{{ $articulo->id }}">Confirmar Eliminación</h5>
-                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>¿Estás seguro/a de eliminar el artículo <strong>{{ $articulo->Nombre }} {{ $articulo->Marca }}</strong>?</p>

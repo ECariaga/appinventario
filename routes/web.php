@@ -45,3 +45,5 @@ Route::get('/configuracion', function () {
 //Rutas Excel
 Route::get('/reportes',[ExportController::class,'index'])->name('reporte');
 Route::get('/exportar',[ExportController::class,'export'])->name('exportar');
+Route::get('/exportar/general', [ExportController::class, 'exportGeneral'])->name('exportar.general');
+Route::get('/exportar/ubicacion', [ExportController::class, 'exportPorUbicacion'])->name('exportar.ubicacion');

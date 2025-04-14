@@ -4,57 +4,65 @@ namespace App\Exports;
 
 use App\Models\Articulo;
 use App\Models\Estado;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithStyles;
+use App\Models\Ubicacion;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ArticulosExports implements FromView, ShouldAutoSize, WithStyles
 {
-   public function view():View{
-    return view('exportArticulos',[
-        'articulo'=> Articulo::all(),
-        'estados'=> Estado::all()
-    ]);
-   }
+    protected $ubicacionId;
 
-   public function styles(Worksheet $sheet){
+    public function __construct($ubicacionId = null)
+    {
+        $this->ubicacionId = $ubicacionId;
+    }
 
-    $sheet->setTitle('Lista de Artículos');
-    //Estilos el titulo de la tabla
-    $sheet->getStyle('A1:G1')->applyFromArray([
-        'font'=>[
-            'bold'=> true,
-            'name'=> 'Arial',
-            
-        ],
-        'alignment'=>[
-            'horizontal'=> 'center',
-        ],
-        'fill'=>[
-            'fillType' => 'solid',
-            'startColor' => [
-                'argb' => '72A8F8'
+    public function view(): View
+    {
+        $articulos = Articulo::with('estado', 'ubicacion');
+
+        if ($this->ubicacionId) {
+            $articulos = $articulos->where('id_ubicacion', $this->ubicacionId);
+        }
+
+        return view('exportArticulos', [
+            'articulo' => $articulos->get(),
+            'estados' => Estado::all(),
+            'ubicaciones' => Ubicacion::all(),
+        ]);
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        $sheet->setTitle('Lista de Artículos');
+        $sheet->getStyle('A1:G1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'name' => 'Arial',
             ],
-        ],
-    ]);
-    //Estilos de elementos de la tabla
-    $sheet->getStyle('A1:G' .$sheet->getHighestRow())->applyFromArray([
-        'borders'=> [
-            'allBorders' => [
-                'borderStyle' => 'thin',
+            'alignment' => [
+                'horizontal' => 'center',
             ],
-        ],
-        'alignment'=>[
-            'horizontal'=> 'center',
-        ],
-    ]);
+            'fill' => [
+                'fillType' => 'solid',
+                'startColor' => [
+                    'argb' => '72A8F8'
+                ],
+            ],
+        ]);
 
-    //Para aplicar en que fila va a aparecer el cursor
-    $sheet->getStyle('A2')->applyFromArray([
-        
-    ]);
-
-   }
+        $sheet->getStyle('A1:G' . $sheet->getHighestRow())->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => 'thin',
+                ],
+            ],
+            'alignment' => [
+                'horizontal' => 'center',
+            ],
+        ]);
+    }
 }
