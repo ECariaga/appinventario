@@ -63,7 +63,7 @@
                                 <img class="img-thumbnail" src="{{ asset('storage/' . $articulo->Foto) }}" width="80" alt="Foto del artículo">
                             </td>
                             <td>
-                                <div class="d-flex justify-content-center flex-wrap gap-2">
+                                <div class="d-flex justify-content-center flex-row gap-2">
                                     <a href="{{ url('/articulo/' . $articulo->id) }}" title="Ver detalle" class="btn btn-outline-secondary btn-sm">
                                         <i class="bi bi-eye-fill"></i>
                                     </a>
