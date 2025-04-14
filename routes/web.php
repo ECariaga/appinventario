@@ -6,6 +6,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UbicacionController;
+use App\Http\Controllers\EstadoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,14 @@ Route::get('/logout',[SessionsController::class,'destroy'])->name('login.destroy
 
 Route::resource('/lista-usuarios',UsuarioController::class);
 
+Route::resource('/ubicacion', UbicacionController::class);
+Route::resource('/estados', EstadoController::class);
+Route::get('/configuracion', function () {
+    return view('config');
+});
+
 //Rutas Excel
 Route::get('/reportes',[ExportController::class,'index'])->name('reporte');
 Route::get('/exportar',[ExportController::class,'export'])->name('exportar');
+Route::get('/exportar/general', [ExportController::class, 'exportGeneral'])->name('exportar.general');
+Route::get('/exportar/ubicacion', [ExportController::class, 'exportPorUbicacion'])->name('exportar.ubicacion');

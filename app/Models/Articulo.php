@@ -16,11 +16,15 @@ class Articulo extends Model implements Auditable
 
     protected $table = 'articulo';
     protected $primaryKey = 'id';
-    protected $fillable = ['id_estado','Nombre','Marca','Modelo','NumSerie','Cantidad','Estado','Ubicacion','Foto'];
+    protected $fillable = ['id_estado','id_ubicacion','Nombre','Marca','Modelo','NumSerie','Cantidad','Estado','Foto'];
 
     
 
     public function estado(){
         return $this->belongsTo(Estado::class, 'id_estado', 'id');
+    }
+
+    public function ubicacion(){
+        return $this->belongsTo(Ubicacion::class, 'id_ubicacion', 'id');
     }
 }

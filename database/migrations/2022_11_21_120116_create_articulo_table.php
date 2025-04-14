@@ -16,14 +16,15 @@ return new class extends Migration
         Schema::create('articulo', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_estado');
+            $table->unsignedBigInteger('id_ubicacion');
             $table->string('Nombre');
             $table->string('Marca');
             $table->string('Modelo');
             $table->string('NumSerie');
             $table->integer('Cantidad');
-            $table->string('Ubicacion');
             $table->string('Foto');
             $table->foreign('id_estado')->references('id')->on('estado');
+            $table->foreign('id_ubicacion')->references('id')->on('ubicacion');
             $table->timestamps();
         });
     }

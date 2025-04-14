@@ -2,113 +2,97 @@
 
 @section('css')
 <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 @endsection
 
 @section('content')
+<div class="container py-4">
 
-<div class="py-3">
-    <div class="card">
-        <div class="card-header">
-            <h2>Lista de Artículos</h2>
+    <!-- Encabezado -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold"><i class="bi bi-archive-fill"></i> Lista de Artículos</h2>
+        <a href="{{ url('/articulo/create') }}" title="Agregar Nuevo Artículo" class="btn btn-success btn-lg">
+            <i class="bi bi-plus-circle me-2"></i>Agregar Artículo
+        </a>
+    </div>
+
+    <!-- Mensaje de éxito -->
+    @if(Session::has('mensaje'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ Session::get('mensaje') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
         </div>
+    @endif
 
+    <!-- Tabla -->
+    <div class="card shadow-sm rounded-4">
         <div class="card-body">
-
-            @if(Session::has('mensaje'))
-            <!--Si hay algun mensaje este de debe mostrar-->
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{Session::get('mensaje')}}
-                <!--Para hacer desaparecer el alert-->
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-
-
-            <a href="{{ secure_url('/articulo/create') }}" class="btn btn-success btn-sm" title="Agregar Nuevo Articulo">
-                <i class="fa fa-plus" aria-hidden="true"></i> Agregar Articulo
-            </a>
-            <br />
-            <br />
-
             <div class="table-responsive">
-                <table id="tabla_articulos" class="table table-striped table table-bordered" style="width:100%">
+                <table id="tabla_articulos" class="table table-bordered table-hover align-middle text-center">
                     <thead class="table-dark">
                         <tr>
-                            <th class="align-middle text-center">#</th>
-                            <th class="align-middle text-center">Nombre</th>
-                            <th class="align-middle text-center">Marca</th>
-                            <th class="align-middle text-center">Modelo</th>
-                            <th class="align-middle text-center">N° de Serie</th>
-                            <th class="align-middle text-center">Cantidad</th>
-                            <th class="align-middle text-center">Estado</th>
-                            <th class="align-middle text-center">Ubicación</th>
-                            <th class="align-middle text-center">Foto</th>
-                            <th class="align-middle text-center">Acciones</th>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>N° Serie</th>
+                            <th>Cantidad</th>
+                            <th>Estado</th>
+                            <th>Ubicación</th>
+                            <th>Foto</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @forelse($articulos as $articulo)
                         <tr>
-                            <td class="align-middle text-center">{{ $loop->iteration }}</td>
-                            <td class="align-middle text-center">{{ $articulo->Nombre }}</td>
-                            <td class="align-middle text-center">{{ $articulo->Marca }}</td>
-                            <td class="align-middle text-center">{{ $articulo->Modelo }}</td>
-                            <td class="align-middle text-center">
-                                <div class="d-flex flex-column justify-content-center align-items-center">
-                                    {!! DNS1D::getBarcodeHTML("$articulo->NumSerie",'PHARMA') !!}
-                                    <span>p - {{ $articulo->NumSerie }}</span>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $articulo->Nombre }}</td>
+                            <td>{{ $articulo->Marca }}</td>
+                            <td>{{ $articulo->Modelo }}</td>
+                            <td>
+                                <div class="d-flex flex-column align-items-center">
+                                    {!! DNS1D::getBarcodeHTML("$articulo->NumSerie", 'PHARMA') !!}
+                                    <span class="small text-muted">p - {{ $articulo->NumSerie }}</span>
                                 </div>
                             </td>
-                            <td class="align-middle text-center">{{ $articulo->Cantidad }}</td>
-                            @foreach($estados as $estado)
-                            @if($articulo->id_estado == $estado->id)
-                            <td class="align-middle text-center">{{ $estado -> descripcion }}</td>
-                            @break
-                            @endif
-                            @endforeach
-                            <td class="align-middle text-center">{{ $articulo->Ubicacion }}</td>
-                            <td class="align-middle">
-                                <div class="d-flex justify-content-center align-items-center">
-
-                                <img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$articulo->Foto}}" width="100" alt="">
-                                    
-                                </div>
+                            <td>{{ $articulo->Cantidad }}</td>
+                            <td>{{ $estados->firstWhere('id', $articulo->id_estado)?->descripcion }}</td>
+                            <td>{{ $ubicaciones->firstWhere('id', $articulo->id_ubicacion)?->lugar }}</td>
+                            <td>
+                                <img class="img-thumbnail" src="{{ asset('storage/' . $articulo->Foto) }}" width="80" alt="Foto del artículo">
                             </td>
-                            <td class="align-middle">
-                                <div class="container-fluid h-100">
-                                    <div class="row w-100 align-items-center">
+                            <td>
+                                <div class="d-flex justify-content-center flex-wrap gap-2">
+                                    <a href="{{ url('/articulo/' . $articulo->id) }}" title="Ver detalle" class="btn btn-outline-secondary btn-sm">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                    <a href="{{ url('/articulo/' . $articulo->id . '/edit') }}" title="Editar Artículo" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <!-- Botón eliminar -->
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $articulo->id }}" title="Eliminar Artículo">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>
 
-                                        <div class="col text-center">
-
-                                            <a href="{{ secure_url('/articulo/' . $articulo->id) }}" title="Ver detalle"><button class="btn btn-secondary btn-lg mx-1"><i class="bi bi-eye-fill"></i></button></a>
-                                            <a href="{{ secure_url('/articulo/' . $articulo->id . '/edit') }}" title="Editar Articulo"><button class="btn btn-primary btn-lg mx-1"><i class="bi bi-pencil-square"></i></button></a>
-
-                                            <!-- Boton que despliega el Modal -->
-
-                                            <button type="button" class="btn btn-danger btn-lg mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal" title="Eliminar Articulo"><i class="bi bi-trash-fill"></i></button>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Artículo</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>¿ Estás seguro/a de que desea eliminar este artículo ?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                            <form method="POST" action="{{ secure_url('/articulo' . '/' . $articulo->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                                {{ method_field('DELETE') }}
-                                                                {{ csrf_field() }}
-
-                                                                <button type="submit" class="btn btn-primary">Si, eliminar</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
+                                    <!-- Modal eliminar -->
+                                    <div class="modal fade" id="modalEliminar{{ $articulo->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $articulo->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content rounded-4">
+                                                <div class="modal-header bg-danger text-white">
+                                                    <h5 class="modal-title" id="modalLabel{{ $articulo->id }}">Confirmar Eliminación</h5>
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>¿Estás seguro/a de eliminar el artículo <strong>{{ $articulo->Nombre }} {{ $articulo->Marca }}</strong>?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <form method="POST" action="{{ url('/articulo/' . $articulo->id) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,54 +101,44 @@
                             </td>
                         </tr>
                         @empty
-                        <div class="alert alert-info" role="alert">
-                            <h5>Actualmente no hay artículos registrados</h5>
-                        </div>
+                        <tr>
+                            <td colspan="10">
+                                <div class="alert alert-info m-0">Actualmente no hay artículos registrados.</div>
+                            </td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>
-
             </div>
-
         </div>
     </div>
 </div>
+@endsection
 
 @section('js')
-
-
-
 <script>
     $('#tabla_articulos').DataTable({
         responsive: true,
-
-        "language": {
-            "lengthMenu": "Mostrar _MENU_ artículos por pagina",
-            "info": "Mostrando pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No existen artículos que mostrar",
-            "infoFiltered": "(filtrado de un total de _MAX_ artículos)",
-            "loadingRecords": "Cargando...",
-            "processing": "Procesando...",
-            "search": "Buscar:",
-            "zeroRecords": "No se encontraron coincidencias",
-            "paginate": {
-                "first": "Primera",
-                "last": "Ultima",
-                "next": "Siguente",
-                "previous": "Anterior"
+        language: {
+            lengthMenu: "Mostrar _MENU_ artículos por página",
+            info: "Mostrando página _PAGE_ de _PAGES_",
+            infoEmpty: "No existen artículos para mostrar",
+            infoFiltered: "(filtrado de un total de _MAX_ artículos)",
+            loadingRecords: "Cargando...",
+            processing: "Procesando...",
+            search: "Buscar:",
+            zeroRecords: "No se encontraron coincidencias",
+            paginate: {
+                first: "Primera",
+                last: "Última",
+                next: "Siguiente",
+                previous: "Anterior"
             },
-            "aria": {
-                "sortAscending": ": ordenar columna de forma ascendente",
-                "sortDescending": ": ordenar columna de forma descendente"
+            aria: {
+                sortAscending: ": activar para ordenar ascendente",
+                sortDescending: ": activar para ordenar descendente"
             }
         }
-
     });
 </script>
-
-@endsection
-
-
-
-
 @endsection
