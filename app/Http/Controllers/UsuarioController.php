@@ -16,9 +16,14 @@ class UsuarioController extends Controller
 
     public function destroy($id)
     {
-        User::findOrFail($id);
-        User::destroy($id);
+        $user = User::findOrFail($id);
+        
+        if($user->role == 'admin') {
+            return redirect('lista-usuarios')->with('error', 'No se puede eliminar un usuario administrador');
+        }
+        
+        $user->delete();
  
-        return redirect('lista-usuarios')->with('mensaje', 'Usuario eliminado con éxito');
+        return redirect('lista-usuarios')->with('success', 'Usuario eliminado con éxito');
     }
 }
